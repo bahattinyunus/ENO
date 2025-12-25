@@ -1,20 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ENO // TACTICAL COMMAND</title>
+    <title>ENO // TACTICAL COMMAND v1.2</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <!-- Google Fonts for High-Tech feel -->
-    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@500;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
+
+    <!-- Socket.IO & Leaflet JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
 </head>
+
 <body>
-    <div class="overlay"></div> <!-- Scanline effect -->
-    
+    <div class="overlay"></div>
+
     <header>
         <div class="logo">🛡️ ENO <span class="blink">SYSTEMS</span></div>
         <div class="header-info">
-            <span id="sys-clock">00:00:00</span> | STATUS: <span class="status-ok">OPERATIONAL</span>
+            <span id="sys-clock">00:00:00</span> | STATUS: <span class="status-ok">CONNECTED</span>
         </div>
     </header>
 
@@ -24,42 +34,46 @@
             <h3>// SYSTEM DIAGNOSTICS</h3>
             <div class="stat-row">
                 <label>CPU LOAD</label>
-                <div class="bar-container"><div class="bar" id="cpu-bar" style="width: 0%"></div></div>
+                <div class="bar-container">
+                    <div class="bar" id="cpu-bar" style="width: 0%"></div>
+                </div>
                 <span id="cpu-val">0%</span>
             </div>
             <div class="stat-row">
                 <label>MEMORY</label>
-                <div class="bar-container"><div class="bar" id="mem-bar" style="width: 0%"></div></div>
+                <div class="bar-container">
+                    <div class="bar" id="mem-bar" style="width: 0%"></div>
+                </div>
                 <span id="mem-val">0%</span>
             </div>
             <div class="stat-row">
                 <label>CORE TEMP</label>
                 <span id="temp-val" class="highlight">0°C</span>
             </div>
-             <div class="stat-row">
+            <div class="stat-row">
                 <label>UPTIME</label>
                 <span id="uptime-val">0s</span>
             </div>
         </section>
 
-        <!-- Panel 2: Live Network Feed -->
-        <section class="panel wide" id="panel-traffic">
-            <h3>// ENCRYPTED TRAFFIC FEED [SECURE_CHANNEL_7]</h3>
-            <div class="terminal-window" id="traffic-log">
-                <!-- Logs injected via JS -->
-                <div class="log-entry"><span class="time">--:--:--</span> Initializing feed...</div>
-            </div>
+        <!-- Panel 2: Tactical Map (Replacing old wide panel layout) -->
+        <section class="panel wide" id="panel-map-container" style="display: flex; flex-direction: column;">
+            <h3>// TACTICAL MAP [LIVE FEED]</h3>
+            <div id="map" style="flex-grow: 1; min-height: 300px; border: 1px solid #0051ff;"></div>
         </section>
 
-        <!-- Panel 3: Threat Analysis -->
-        <section class="panel" id="panel-threats">
-            <h3>// THREAT DETECTION [IDS]</h3>
-            <div id="threat-display">
-                <div class="radar-circle">
-                    <div class="radar-swipe"></div>
-                </div>
-                <ul id="alert-list">
-                    <li>Parsing signatures...</li>
+        <!-- Panel 3: Traffic & Threats (Split View) -->
+        <section class="panel" style="display: flex; flex-direction: column; overflow: hidden;">
+            <h3>// COMMS & INTEL</h3>
+
+            <div style="flex: 1; overflow-y: auto; margin-bottom: 15px;" id="traffic-log" class="terminal-window">
+                <div class="log-entry"><span class="time">--:--:--</span> Awaiting Uplink...</div>
+            </div>
+
+            <div style="height: 120px; border-top: 1px solid #0051ff; padding-top: 10px;">
+                <h4 style="color:red; font-size:12px; margin-bottom:5px;">ACTIVE THREATS</h4>
+                <ul id="alert-list" style="height: 100%; overflow-y: auto;">
+                    <li>No Active Threats</li>
                 </ul>
             </div>
         </section>
@@ -71,4 +85,5 @@
 
     <script src="{{ url_for('static', filename='dashboard.js') }}"></script>
 </body>
+
 </html>
