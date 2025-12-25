@@ -1,0 +1,6 @@
+cryptography
+numpy
+colorama
+pytest
+flask
+flask-cors

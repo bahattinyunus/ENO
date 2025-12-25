@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ENO // TACTICAL COMMAND</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <!-- Google Fonts for High-Tech feel -->
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="overlay"></div> <!-- Scanline effect -->
+    
+    <header>
+        <div class="logo">🛡️ ENO <span class="blink">SYSTEMS</span></div>
+        <div class="header-info">
+            <span id="sys-clock">00:00:00</span> | STATUS: <span class="status-ok">OPERATIONAL</span>
+        </div>
+    </header>
+
+    <main class="grid-container">
+        <!-- Panel 1: System Health -->
+        <section class="panel" id="panel-health">
+            <h3>// SYSTEM DIAGNOSTICS</h3>
+            <div class="stat-row">
+                <label>CPU LOAD</label>
+                <div class="bar-container"><div class="bar" id="cpu-bar" style="width: 0%"></div></div>
+                <span id="cpu-val">0%</span>
+            </div>
+            <div class="stat-row">
+                <label>MEMORY</label>
+                <div class="bar-container"><div class="bar" id="mem-bar" style="width: 0%"></div></div>
+                <span id="mem-val">0%</span>
+            </div>
+            <div class="stat-row">
+                <label>CORE TEMP</label>
+                <span id="temp-val" class="highlight">0°C</span>
+            </div>
+             <div class="stat-row">
+                <label>UPTIME</label>
+                <span id="uptime-val">0s</span>
+            </div>
+        </section>
+
+        <!-- Panel 2: Live Network Feed -->
+        <section class="panel wide" id="panel-traffic">
+            <h3>// ENCRYPTED TRAFFIC FEED [SECURE_CHANNEL_7]</h3>
+            <div class="terminal-window" id="traffic-log">
+                <!-- Logs injected via JS -->
+                <div class="log-entry"><span class="time">--:--:--</span> Initializing feed...</div>
+            </div>
+        </section>
+
+        <!-- Panel 3: Threat Analysis -->
+        <section class="panel" id="panel-threats">
+            <h3>// THREAT DETECTION [IDS]</h3>
+            <div id="threat-display">
+                <div class="radar-circle">
+                    <div class="radar-swipe"></div>
+                </div>
+                <ul id="alert-list">
+                    <li>Parsing signatures...</li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        ENO DEFENSE ARCHITECTURE // AUTH: B.Y. ÇETİN // CONFIDENTIAL
+    </footer>
+
+    <script src="{{ url_for('static', filename='dashboard.js') }}"></script>
+</body>
+</html>
